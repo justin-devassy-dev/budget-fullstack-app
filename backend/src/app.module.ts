@@ -1,11 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './user/user.module';
-
-console.log("DEBUG - Database URL:", process.env.DATABASE_URL);
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user/entities/user.entity';
 
 
 @Module({
@@ -20,9 +16,9 @@ console.log("DEBUG - Database URL:", process.env.DATABASE_URL);
         rejectUnauthorized: false, // required for Supabase
       },
     }),
-    UserModule,
+    TypeOrmModule.forFeature([User]),
+    
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  
 })
 export class AppModule {}
