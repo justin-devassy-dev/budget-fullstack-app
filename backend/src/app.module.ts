@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
+import { UserModule } from './user/user.module';
 
 
 @Module({
@@ -16,6 +17,7 @@ import { User } from './user/entities/user.entity';
         rejectUnauthorized: false, // required for Supabase
       },
     }),
+    UserModule,
     TypeOrmModule.forFeature([User]),
     
   ],
