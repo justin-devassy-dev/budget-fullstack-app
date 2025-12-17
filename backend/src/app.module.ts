@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
-
-console.log("DEBUG - Database URL:", process.env.DATABASE_URL);
 
 
 @Module({
@@ -21,8 +18,9 @@ console.log("DEBUG - Database URL:", process.env.DATABASE_URL);
       },
     }),
     UserModule,
+    TypeOrmModule.forFeature([User]),
+    
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  
 })
 export class AppModule {}
